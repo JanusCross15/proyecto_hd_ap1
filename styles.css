@@ -1,0 +1,327 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #E5E3DC;
+    color: #333;
+}
+
+/* NAVBAR */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: #E5E3DC;
+}
+
+.logo {
+    color: #d08c72;
+    font-weight: bold;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+nav a:hover {
+    border-bottom: 2px solid #333;
+}
+
+/* HERO */
+.hero {
+    height: 450px;
+    background: url("assets/banner.jpg") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero h1 {
+    position: relative;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    max-width: 600px;
+}
+
+/* Banner Login */
+.imagenBannerLogin {
+    height: 450px;
+    background: url("assets/banner-login.jpg") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.imagenBannerLogin::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.imagenBannerLogin h1 {
+    position: relative;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    max-width: 600px;
+}
+
+/* TITULOS */
+h2 {
+    text-align: center;
+    margin: 40px 0 20px;
+    font-size: 30px;
+}
+
+#carrito h2 {
+    text-align: left;
+    color: #D08C72;
+}
+
+/* PRODUCTOS */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    padding: 10px 30px;
+}
+
+/* INICIO index*/
+.inicio-productos {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* CARD PRODUCTO */
+.producto {
+    background: none;
+    padding: 0;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+}
+
+.producto img {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.producto img:hover {
+    transform: scale(1.03);
+}
+
+/* INFO PRODUCTO */
+.info {
+    margin-top: 10px;
+}
+
+.info h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.info p {
+    color: #555;
+}
+
+/* BOTONES */
+button {
+    background-color: #d08c72;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #b8765f;
+}
+
+/* ACERCA */
+.acerca {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 60px;
+}
+
+.acerca .texto {
+    flex: 1;
+}
+
+.acerca h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.acerca p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.acerca img {
+    width: 50%;
+    border-radius: 10px;
+}
+
+/* CONTACTO */
+.contacto {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 60px;
+}
+
+.formulario {
+    flex: 1;
+}
+
+.formulario h1 {
+    margin-bottom: 20px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    height: 120px;
+}
+
+/* CARRITO */
+#carrito {
+    padding: 60px;
+}
+
+#lista li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#lista img {
+    border-radius: 8px;
+}
+
+.pagar {
+    margin-top: 30px;
+    width: 300px;
+    font-size: 18px;
+}
+
+/* DETALLE PRODUCTO */
+.detalle {
+    display: flex;
+    gap: 40px;
+    padding: 60px;
+}
+
+.detalle img {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.detalle-info {
+    flex: 1;
+}
+
+.detalle-info h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.detalle-info p {
+    margin-bottom: 15px;
+}
+
+
+/* Promo descuento */
+.promo-descuento {
+    margin: 20px 0;
+}
+
+/* Style Total*/
+#total {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: #333;
+}
+
+#total strong {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .productos {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .acerca {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .acerca img {
+        width: 100%;
+    }
+
+    .contacto {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moda y Estilo Única</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+    <h2 class="logo">MODA Y ESTILO UNICA</h2>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="tienda.html">Tienda</a>
+        <a href="acercade.html">Acerca de</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="carrito.html">Carrito (<span id="contador">0</span>)</a>
+        <a href="login.html">Iniciar sesion</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Moda femenina que resalta tu estilo</h1>
+</section>
+
+<!-- PRODUCTOS -->
+<section>
+    <h2>Productos destacados</h2>
+
+    <div class="productos inicio-productos">
+        <div class="producto">
+            <img src="assets/blusa.jpg">
+            <h3>BLUSAS</h3>
+            <p>S/ 25.00</p>
+            <button class="btn btn-dark" onclick="agregar('Blusa',25,'assets/blusa.jpg')">Añadir al carrito</button>
+            <p>Stock: <span id="stock-Blusa"></span></p>
+            
+        </div>
+
+        <div class="producto">
+            <img src="assets/vestido.jpg">
+            <h3>VESTIDO</h3>
+            <p>S/ 30.00</p>
+            <button class="btn btn-dark" onclick="agregar('Vestido',30,'assets/vestido.jpg')">Añadir al carrito</button>
+            <p>Stock: <span id="stock-Vestido"></span></p>
+        </div>
+
+        <div class="producto">
+            <img src="assets/sueter.jpg">
+            <h3>SUETER</h3>
+            <p>S/ 45.00</p>
+            <button class="btn btn-dark" onclick="agregar('Sueter',45,'assets/sueter.jpg')">Añadir al carrito</button>
+            <p>Stock: <span id="stock-Sueter"></span></p>
+        </div>
+
+        <div class="producto">
+            <img src="assets/polo.jpg">
+            <h3>POLO</h3>
+            <p>S/ 35.00</p>
+            <button class="btn btn-dark" onclick="agregar('Polo',35,'assets/polo.jpg')">Añadir al carrito</button>
+            <p>Stock: <span id="stock-Polo"></span></p>
+        </div>
+
+        <div class="producto">
+            <img src="assets/top.jpg">
+            <h3>TOP</h3>
+            <p>S/ 30.00</p>
+            <button class="btn btn-dark" onclick="agregar('Top',30,'assets/top.jpg')">Añadir al carrito</button>
+            <p>Stock: <span id="stock-Top"></span></p>
+        </div>
+
+        <div class="producto">
+            <img src="assets/chaqueta.jpg">
+            <h3>CHAQUETA</h3>
+            <p>S/ 40.00</p>
+            <button class="btn btn-dark" onclick="agregar('Chaqueta',40,'assets/chaqueta.jpg')">Añadir al carrito</button>
+            <p>Stock: <span id="stock-Chaqueta"></span></p>
+        </div>
+    </div>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
