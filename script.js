@@ -78,7 +78,7 @@ function mostrarCarrito() {
     let descuento = 0;
 
     if (subtotal > 100) {
-        descuento = subtotal * 0.10;
+        descuento = subtotal * 0.15;
     }
 
     let totalPagar = subtotal - descuento;
