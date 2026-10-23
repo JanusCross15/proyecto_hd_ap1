@@ -134,4 +134,13 @@ Para las siguientes etapas del proyecto se plantea ampliar progresivamente la fu
 
 ---
 
-> Proyecto desarrollado con fines académicos para demostrar el desarrollo colaborativo de software y el uso de herramientas de control de versiones.
+✨ Mejoras implementadas - Historial de cambios
+
+Como parte de la evolución del proyecto, se incorporaron mejoras en la estructura y presentación de la tienda virtual:
+
+## Rama: feature/footer-global
+## Autor: Edwin Siguas
+## Fecha: 23-10-2026
+
+* Footer global: incorporación de un pie de página en las diferentes páginas del sitio web para mantener una estructura visual uniforme.
+
