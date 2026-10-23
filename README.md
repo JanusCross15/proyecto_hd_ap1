@@ -139,8 +139,11 @@ Para las siguientes etapas del proyecto se plantea ampliar progresivamente la fu
 Como parte de la evolución del proyecto, se incorporaron mejoras en la estructura y presentación de la tienda virtual:
 
 ## Rama: feature/footer-global
-## Autor: Edwin Siguas
-## Fecha: 23-10-2026
-
+* Autor: Edwin Siguas
+* Fecha: 23-10-2026
 * Footer global: incorporación de un pie de página en las diferentes páginas del sitio web para mantener una estructura visual uniforme.
 
+## Rama: feature/banner-responsive-bootstrap
+* Autor: Jose Caja
+* Fecha: 23-10-2026
+* Footer global: Mejoras banner Navbar, responsivo
