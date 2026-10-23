@@ -78,7 +78,7 @@ function mostrarCarrito() {
     let descuento = 0;
 
     if (subtotal > 100) {
-        descuento = subtotal * 0.10;
+        descuento = subtotal * 0.15;
     }
 
     let totalPagar = subtotal - descuento;
@@ -150,7 +150,7 @@ if (form) {
         let password = document.getElementById("password").value;
 
         const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const regexPassword = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+        const regexPassword = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{9}$/;
 
         if(!regexCorreo.test(correo)){
             alert("Correo inválido");
@@ -158,7 +158,7 @@ if (form) {
         }
 
         if(!regexPassword.test(password)){
-            alert("La contraseña debe tener mínimo 8 caracteres, una mayúscula y un número");
+            alert("La contraseña debe tener exactamente 9 caracteres alfanuméricos, una mayúscula y un número");
             return;
         }
 
