@@ -31,6 +31,7 @@ La primera versión del proyecto incluye:
 * 🛍️ **Carrito de compras**
 * 🔐 **Página de inicio de sesión**
 * ℹ️ **Página Acerca de**
+* 📍 **Mapa de ubicación en Google Maps**
 * 📞 **Página de Contacto**
 * 🎨 **Diseño mediante CSS**
 * ⚙️ **Interactividad mediante JavaScript**
@@ -147,3 +148,8 @@ Como parte de la evolución del proyecto, se incorporaron mejoras en la estructu
 * Autor: Jose Caja
 * Fecha: 23-10-2026
 * Footer global: Mejoras banner Navbar, responsivo
+
+## Rama: feature/mapa-ubicacion-tienda
+* Autor: César Carhuacusma
+* Fecha: 23-10-2026
+* Mapa de ubicación: incorporación de un mapa de Google Maps incrustado en la página "Acerca de", junto con la dirección y el horario de atención de la tienda.
