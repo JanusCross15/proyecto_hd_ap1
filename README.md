@@ -90,7 +90,7 @@ Como parte de la evolución del proyecto, se incorporaron mejoras en la estructu
 ## Rama: feature/banner-responsive-bootstrap
 * Autor: Jose Caja
 * Fecha: 23-10-2026
-* Footer global: Mejoras banner Navbar, responsivo
+* Navbar global: Mejoras banner Navbar, responsivo
 
 ## Rama: feature/mapa-ubicacion-tienda
 * Autor: César Carhuacusma
@@ -101,3 +101,8 @@ Como parte de la evolución del proyecto, se incorporaron mejoras en la estructu
 * Autor: Kelly Idrogo
 * Fecha: 23-10-2026
 * Tienda: ampliacióºn de catalogo, se agrega calzados y jeans
+
+## Rama: feature/boton-flotante-whatsapp
+* Autor: Bryam Saldaña
+* Fecha: 24-10-2026
+* Navbar global: Se agregará boton flotante de whatsapp en todas las paginas
