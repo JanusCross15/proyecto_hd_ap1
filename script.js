@@ -11,8 +11,10 @@ const stockInicial = {
     Chaqueta: 2,
     "Zapatillas blancas": 12,
     "Sandalias beige": 10,
+    "Botines negros": 10,
     "Jeans rectos": 15,
-    "Jeans wide leg": 12
+    "Jeans wide leg": 12,
+    "Jeans skinny": 14
 };
 
 // Añadir nuevos productos sin restablecer las existencias ya guardadas.
