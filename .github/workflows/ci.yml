@@ -1,0 +1,112 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validar Estructura, Sintaxis y Recursos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verificar archivos obligatorios y ausencia de .DS_Store
+        run: |
+          echo "==> Verificando archivos obligatorios del proyecto..."
+          REQUIRED_FILES=(
+            "index.html"
+            "tienda.html"
+            "carrito.html"
+            "contacto.html"
+            "login.html"
+            "acercade.html"
+            "styles.css"
+            "script.js"
+            "README.md"
+          )
+          MISSING=0
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Error: Falta el archivo obligatorio '$file'"
+              MISSING=1
+            else
+              echo "✔ Archivo presente: $file"
+            fi
+          done
+
+          echo "==> Verificando que no existan archivos .DS_Store en el repositorio..."
+          DS_STORE_COUNT=$(find . -name ".DS_Store" | wc -l)
+          if [ "$DS_STORE_COUNT" -gt 0 ]; then
+            echo "❌ Error: Se detectaron archivos .DS_Store en el repositorio:"
+            find . -name ".DS_Store"
+            MISSING=1
+          else
+            echo "✔ No se encontraron archivos .DS_Store"
+          fi
+
+          if [ "$MISSING" -ne 0 ]; then
+            echo "La verificación de estructura ha fallado."
+            exit 1
+          fi
+
+      - name: Validar sintaxis JavaScript
+        run: |
+          echo "==> Validando sintaxis de script.js con node --check..."
+          node --check script.js
+          echo "✔ Sintaxis de JavaScript correcta."
+
+      - name: Auditoría de reglas HTML5 con HTMLHint
+        run: |
+          echo "==> Ejecutando auditoría de código HTML con HTMLHint..."
+          npx --yes htmlhint "*.html"
+          echo "✔ Todas las plantillas HTML cumplen los estándares definidos en .htmlhintrc."
+
+      - name: Validar integridad de referencias a assets locales
+        run: |
+          echo "==> Comprobando que todas las rutas 'assets/...' referenciadas existan exactamente en disco..."
+          node -e '
+          const fs = require("fs");
+          const path = require("path");
+
+          const htmlFiles = fs.readdirSync(".").filter(f => f.endsWith(".html"));
+          let errors = 0;
+
+          for (const file of htmlFiles) {
+            const content = fs.readFileSync(file, "utf8");
+            const matches = [...content.matchAll(/(?:src|href)=["\x27](assets\/[^"\x27]+)["\x27]/g)];
+            for (const match of matches) {
+              const assetPath = match[1];
+              if (!fs.existsSync(assetPath)) {
+                console.error(`❌ Referencia rota en ${file}: ${assetPath}`);
+                errors++;
+              } else {
+                const dir = path.dirname(assetPath);
+                const base = path.basename(assetPath);
+                const actualFiles = fs.readdirSync(dir);
+                if (!actualFiles.includes(base)) {
+                  console.error(`❌ Discrepancia de mayúsculas/minúsculas en ${file}: ${assetPath}`);
+                  errors++;
+                }
+              }
+            }
+          }
+
+          if (errors > 0) {
+            console.error(`Se encontraron ${errors} error(es) en las rutas de assets.`);
+            process.exit(1);
+          }
+          console.log("✔ Todas las referencias a assets existen y respetan mayúsculas y minúsculas.");
+          '
