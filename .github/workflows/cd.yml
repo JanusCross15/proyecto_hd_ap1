@@ -1,76 +1,70 @@
-name: CD Pipeline - Despliegue Continuo
+name: CD Pipeline - Vercel y Render
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   verify:
-    name: Verificación Previa al Despliegue
+    name: Verificación previa al despliegue
     runs-on: ubuntu-latest
-
     steps:
-      - name: Clonar repositorio
+      - name: Descargar código del repositorio
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js 20
+      - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
 
-      - name: Comprobar integridad de archivos y sintaxis
+      - name: Verificar archivos base del proyecto
         run: |
-          echo "==> Verificando archivos obligatorios..."
-          for file in index.html tienda.html carrito.html contacto.html login.html acercade.html styles.css script.js vercel.json; do
+          for file in index.html tienda.html carrito.html contacto.html login.html acercade.html styles.css script.js README.md; do
             if [ ! -f "$file" ]; then
-              echo "❌ Falta el archivo requerido: $file"
+              echo "Error: falta el archivo $file"
               exit 1
             fi
           done
 
-          echo "==> Verificando sintaxis JavaScript..."
-          node --check script.js
+      - name: Validar sintaxis JavaScript
+        run: node --check script.js
 
-          echo "==> Verificando reglas HTML5 con HTMLHint..."
-          npx --yes htmlhint "*.html"
-          echo "✔ Validaciones previas completadas con éxito."
+      - name: Auditar vistas HTML5
+        run: npx --yes htmlhint "*.html"
 
   deploy-vercel:
-    name: Desplegar en Vercel (+ Hook Render)
+    name: Despliegue en Vercel (y hook opcional Render)
     needs: verify
     runs-on: ubuntu-latest
     env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
     steps:
-      - name: Clonar repositorio
+      - name: Descargar código del repositorio
         uses: actions/checkout@v4
-
-      - name: Configurar Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
 
       - name: Instalar Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Descargar configuración de entorno Vercel
+      - name: Obtener configuración del proyecto en Vercel
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Compilar artefactos de producción
+      - name: Construir artefacto para producción
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Desplegar en Vercel (Producción)
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      # Este paso se activará automáticamente al conectar un backend en Render sin romper el flujo si el secret está vacío
-      - name: Disparar Deploy Hook de Render (Opcional - Backend)
-        if: ${{ secrets.RENDER_DEPLOY_HOOK_URL != '' }}
+      - name: Desplegar frontend en producción (Vercel)
         run: |
-          echo "==> Notificando despliegue de backend a Render mediante Webhook..."
-          curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
-          echo "✔ Despliegue en Render disparado satisfactoriamente."
+          DEPLOY_URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "URL desplegada en Vercel: $DEPLOY_URL"
+
+      - name: Disparar despliegue de backend en Render (opcional)
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$RENDER_DEPLOY_HOOK_URL" ]; then
+            curl -fsS -X POST "$RENDER_DEPLOY_HOOK_URL"
+            echo "Webhook de Render disparado correctamente."
+          else
+            echo "Sin backend en Render configurado. Omitiendo despliegue de API."
+          fi
