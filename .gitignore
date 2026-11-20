@@ -1,1 +1,17 @@
+# Archivos del sistema
 .DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Configuración de editores
+.vscode/
+.idea/
+
+# Despliegue y dependencias
+.vercel/
+node_modules/
+
+# Logs y variables de entorno
+*.log
+.env
+.env.*
